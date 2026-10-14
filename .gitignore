@@ -1,4 +1,4 @@
-# Virtual environment
+# Virtual environments
 .venv/
 venv/
 env/
@@ -12,23 +12,7 @@ __pycache__/
 
 # Environment variables and secrets
 .env
-
-# Editor settings
-.vscode/
-.idea/# Virtual environment
-.venv/
-venv/
-env/
-
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Test cache
-.pytest_cache/
-
-# Environment variables and secrets
-.env
+.env.*
 
 # Editor settings
 .vscode/
