@@ -1,14 +1,14 @@
 # Password Generator — Functional Approach
 
-A Python project for learning function-based programming, software design, input validation, and automated testing.
+A Python project for learning function-based programming, software design, input validation, exception handling, and automated testing.
 
 ## About the Project
 
 Password Generator is an educational project developed as part of my Python learning journey.
 
-The main goal is to practice the process of designing, implementing, testing, and organizing a Python project. This version focuses on a functional approach, using standalone functions to generate different types of passwords.
+The main goal is to practice designing, implementing, testing, and organizing a Python project. This implementation uses standalone functions to generate different types of passwords.
 
-It provides the same core functionality as Solution 01, which uses object-oriented programming (OOP), allowing both approaches to be compared.
+This is Solution 02 of the repository. Solution 01 implements the same core functionality using object-oriented programming (OOP), allowing both approaches to be compared.
 
 ## Features
 
@@ -16,7 +16,8 @@ It provides the same core functionality as Solution 01, which uses object-orient
 - **Random Password Generator:** Generates random passwords with optional numbers and symbols.
 - **Memorable Password Generator:** Generates passwords using randomly selected words, with configurable word counts and separators.
 - **Input Validation:** Validates function arguments and raises appropriate exceptions for invalid inputs.
-- **Automated Testing:** Uses `pytest` to test functionality and input validation.
+- **Exception Handling:** Provides an informative error when the required NLTK words corpus is unavailable.
+- **Automated Testing:** Uses `pytest` to test functionality, output characteristics, and invalid inputs.
 - **Secure Randomness:** Uses Python's `secrets` module for random selection.
 
 ## Technologies
@@ -26,11 +27,11 @@ It provides the same core functionality as Solution 01, which uses object-orient
 - `secrets`
 - `string`
 - NLTK
-- pytest
+- `pytest`
 
 ## Project Structure
 
-```text
+```text id="n7s1ka"
 solution02/
 ├── README.md
 ├── requirements.txt
@@ -44,37 +45,52 @@ solution02/
 
 ### 1. Clone the repository
 
-```bash
+```bash id="z9a2w3"
 git clone https://github.com/saeedrostami-dev/Password_Generator.git
 ```
 
-### 2. Navigate to this solution
+### 2. Navigate to Solution 02
 
-```bash
+```bash id="c2d6p8"
 cd Password_Generator/solutions/solution02
 ```
 
-### 3. Install dependencies
+### 3. Create and activate a virtual environment
 
-```bash
+```bash id="m5v8r1"
+python -m venv .venv
+source .venv/bin/activate
+```
+
+On Windows, activate the environment using PowerShell:
+
+```powershell id="q4t6x2"
+.venv\Scripts\Activate.ps1
+```
+
+### 4. Install dependencies
+
+```bash id="u8j3w5"
 python -m pip install -r requirements.txt
 ```
 
-### 4. Download the NLTK words corpus
+### 5. Download the NLTK words corpus
 
 The memorable password generator uses the NLTK English words corpus.
 
-```bash
+```bash id="k2p7r9"
 python -m nltk.downloader words
 ```
 
+This download is normally required only once for the relevant Python environment. If the corpus is missing, the generator raises an informative `LookupError`.
+
 ## Usage
 
-The following examples assume that the project is run from the `solution02` directory.
+The following examples assume that the commands are run from the `solutions/solution02` directory.
 
 ### PIN Password
 
-```python
+```python id="b4n8s6"
 from src.main import generate_pin
 
 password = generate_pin(length=6)
@@ -84,7 +100,7 @@ print(password)
 
 ### Random Password
 
-```python
+```python id="e3f7h2"
 from src.main import generate_random_password
 
 password = generate_random_password(
@@ -98,7 +114,7 @@ print(password)
 
 ### Memorable Password
 
-```python
+```python id="v6c1m9"
 from src.main import generate_memorable_password
 
 password = generate_memorable_password(
@@ -111,13 +127,13 @@ print(password)
 
 ## Running Tests
 
-Run the following command from the `solution02` directory:
+Run the following command from the `solutions/solution02` directory:
 
-```bash
+```bash id="r5x2j8"
 python -m pytest -v
 ```
 
-The test suite covers password generation, output characteristics, and invalid inputs.
+The tests cover password generation, output characteristics, input validation, and error handling when the NLTK corpus is missing.
 
 ## Learning Objectives
 
@@ -127,6 +143,7 @@ Through this project, I am practicing:
 - Organizing code into reusable functions.
 - Choosing appropriate function parameters and return values.
 - Validating input and handling exceptions.
+- Using Python's `secrets` module for secure random selection.
 - Writing automated tests with `pytest`.
 - Using parameterized tests to reduce repetition.
 - Organizing source code, tests, and project dependencies.
@@ -137,11 +154,11 @@ Through this project, I am practicing:
 
 Possible next steps include:
 
-- Comparing object-oriented and function-based designs.
+- Comparing the object-oriented and functional implementations.
 - Improving test coverage and project documentation.
 - Exploring additional password generation strategies.
 - Refactoring repeated validation logic where appropriate.
 
 ## Disclaimer
 
-This is an educational project created for learning and practice. It is not intended to be presented as a production-ready password management solution.
+This is an educational project created for learning and practice. It is not intended to be a production-ready password management solution.
