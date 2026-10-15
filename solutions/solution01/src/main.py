@@ -162,7 +162,14 @@ class MemorablePasswordGenerator(PasswordGenerator):
             raise TypeError("capitalization must be a boolean.")
 
         if vocabulary is None:
-            vocabulary = nltk.corpus.words.words()
+            try:
+                vocabulary = nltk.corpus.words.words()
+            except LookupError as exc:
+                raise LookupError(
+                    "NLTK words corpus is missing. "
+                    "Download it using "
+                    "'python -m nltk.downloader words'."
+                ) from exc
         else:
             if not isinstance(vocabulary, list):
                 raise TypeError("vocabulary must be a list of strings.")
@@ -197,11 +204,9 @@ class MemorablePasswordGenerator(PasswordGenerator):
 def main() -> None:
     """Demonstrate the available password generators."""
 
-    # PIN password
     pin_generator = PinPasswordGenerator(length=6)
     print(f"PIN: {pin_generator.generate()}")
 
-    # Random password
     random_generator = RandomPasswordGenerator(
         length=8,
         include_numbers=True,
@@ -209,7 +214,6 @@ def main() -> None:
     )
     print(f"Random: {random_generator.generate()}")
 
-    # Memorable password
     memorable_generator = MemorablePasswordGenerator(
         number_of_words=3,
         separator="-",

@@ -1,8 +1,13 @@
 import string
 
+import nltk
 import pytest
 
-from src.main import MemorablePasswordGenerator, PinPasswordGenerator, RandomPasswordGenerator
+from src.main import (
+    MemorablePasswordGenerator,
+    PinPasswordGenerator,
+    RandomPasswordGenerator,
+)
 
 
 # Shared test data
@@ -158,16 +163,13 @@ def test_random_password_rejects_length_too_short_for_options(
     length,
 ):
     if length == 0:
-        # Zero length is invalid regardless of the options.
-        expected_error = ValueError
         expected_message = "Length must be positive."
     else:
-        expected_error = ValueError
         expected_message = (
             "Password length is too short for the selected options."
         )
 
-    with pytest.raises(expected_error, match=expected_message):
+    with pytest.raises(ValueError, match=expected_message):
         RandomPasswordGenerator(
             length=length,
             include_numbers=include_numbers,
@@ -305,3 +307,22 @@ def test_memorable_password_rejects_invalid_arguments(
 
     with pytest.raises(error, match=message):
         MemorablePasswordGenerator(**options)
+
+
+def test_memorable_password_raises_error_when_nltk_corpus_is_missing(
+    monkeypatch,
+):
+    def raise_lookup_error():
+        raise LookupError("Corpus not found")
+
+    monkeypatch.setattr(
+        nltk.corpus.words,
+        "words",
+        raise_lookup_error,
+    )
+
+    with pytest.raises(
+        LookupError,
+        match="NLTK words corpus is missing",
+    ):
+        MemorablePasswordGenerator(number_of_words=3)
