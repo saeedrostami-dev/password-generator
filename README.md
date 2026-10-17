@@ -4,6 +4,12 @@ An educational Python project exploring different approaches to password generat
 
 This repository implements the same core password generation features using two different programming styles: object-oriented programming and a functional approach. It also includes a Streamlit web app that provides a graphical interface for generating passwords.
 
+## App Preview
+
+The project includes an interactive web interface built with Streamlit.
+
+![Password Generator App](docs/images/password-generator.png)
+
 ## Implementations
 
 ### Solution 01 — Object-Oriented Programming (OOP)
@@ -36,7 +42,7 @@ See the [Solution 02 README](solutions/solution02/README.md) for installation in
 
 ### Streamlit App — Web Interface
 
-The Streamlit app provides a simple graphical interface for using the password generators from Solution 02.
+The Streamlit app provides a graphical interface for using the password generators from Solution 02.
 
 Features include:
 
@@ -53,6 +59,11 @@ The app reuses the password generation functions from Solution 02 rather than du
 ```text
 Password_Generator/
 ├── README.md
+├── .gitignore
+├── .vscode/
+├── docs/
+│   └── images/
+│       └── password-generator.png
 ├── solutions/
 │   ├── solution01/
 │   │   ├── README.md
@@ -102,7 +113,7 @@ python -m pytest -v
 
 ### Run the Streamlit App
 
-First, install the app's dependencies:
+From the repository root, create a virtual environment and install the app's dependencies.
 
 ```bash
 python -m venv .venv
@@ -110,7 +121,7 @@ source .venv/bin/activate
 python -m pip install -r apps/streamlit_app/requirements.txt
 ```
 
-Then launch the app from the repository root:
+Launch the app:
 
 ```bash
 python -m streamlit run apps/streamlit_app/app.py
@@ -118,13 +129,13 @@ python -m streamlit run apps/streamlit_app/app.py
 
 Streamlit will provide a local URL that you can open in your browser.
 
-On Windows, activate a virtual environment with:
+On Windows, activate the virtual environment with:
 
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-The NLTK `words` corpus is needed for memorable password generation when the default vocabulary is used. Downloading it is a one-time setup step for the relevant Python environment:
+The NLTK `words` corpus is needed for memorable password generation when the default vocabulary is used. Download it in the relevant Python environment if it is not already available:
 
 ```bash
 python -m nltk.downloader words
